@@ -21,7 +21,7 @@ for email, level in EMPLOYEES_AND_EXECUTIVES.items():
 
 while True:
     try:
-        NUMBER_OF_GUESTS = int(input("How many guests would you like"
+        NUMBER_OF_GUESTS = int(input("How many guests would you like "
                                      "to invite? "))
         if NUMBER_OF_GUESTS > len(EMPLOYEES):
             print(f"please enter a number less than or equal to "
