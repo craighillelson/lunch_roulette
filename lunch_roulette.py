@@ -11,6 +11,7 @@ EMPLOYEES_AND_EXECUTIVES = {
 
 EXECUTIVES = []
 EMPLOYEES = []
+GUESTS = []
 
 for email, level in EMPLOYEES_AND_EXECUTIVES.items():
     if level == "executive":
@@ -18,7 +19,19 @@ for email, level in EMPLOYEES_AND_EXECUTIVES.items():
     else:
         EMPLOYEES.append(email)
 
-NUMBER_OF_GUESTS = int(input("How many guests would you like to invite? "))
-print(NUMBER_OF_GUESTS)
+while True:
+    try:
+        NUMBER_OF_GUESTS = int(input("How many guests would you like"
+                                     "to invite? "))
+        if NUMBER_OF_GUESTS > len(EMPLOYEES):
+            print(f"please enter a number less than or equal to "
+                  f"{len(EMPLOYEES)}")
+        else:
+            break
+    except ValueError:
+        print("Please enter an integer.")
 
 RANDOM_NUMBERS_LST = random.sample(range(0, len(EMPLOYEES)), NUMBER_OF_GUESTS)
+
+for employee in RANDOM_NUMBERS_LST:
+    GUESTS.append(EMPLOYEES[employee])
