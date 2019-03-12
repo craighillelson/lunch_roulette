@@ -1,5 +1,6 @@
 """ __doc__ """
 
+import csv
 import random
 
 EMPLOYEES_AND_EXECUTIVES = {
@@ -35,6 +36,12 @@ RANDOM_NUMBERS_LST = random.sample(range(0, len(EMPLOYEES)), NUMBER_OF_GUESTS)
 
 for employee in RANDOM_NUMBERS_LST:
     GUESTS.append(EMPLOYEES[employee])
+
+with open("guests.csv", "w") as out_file:
+    OUT_CSV = csv.writer(out_file)
+    OUT_CSV.writerow(["guest_email"])
+    for guest in GUESTS:
+        OUT_CSV.writerow([guest])
 
 print("The following employees were selected:")
 for employee in GUESTS:
