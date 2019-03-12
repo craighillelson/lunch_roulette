@@ -2,17 +2,20 @@
 
 import csv
 import random
+from collections import namedtuple
 
-EMPLOYEES_AND_EXECUTIVES = {
-    "michael@dundermifflin.com": "executive",
-    "jim@dundermifflin.com": "employee",
-    "pam@dundermifflin.com": "employee",
-    "kevin@dundermifflin.com": "employee",
-    }
-
+EMPLOYEES_AND_EXECUTIVES = {}
 EXECUTIVES = []
 EMPLOYEES = []
 GUESTS = []
+
+with open("employees_and_executives.csv") as csv_file:
+    F_CSV = csv.reader(csv_file)
+    COLUMN_HEADINGS = next(F_CSV)
+    CSV_ROW = namedtuple('Row', COLUMN_HEADINGS)
+    for rows in F_CSV:
+        row = CSV_ROW(*rows)
+        EMPLOYEES_AND_EXECUTIVES[row.email] = row.level
 
 for email, level in EMPLOYEES_AND_EXECUTIVES.items():
     if level == "executive":
