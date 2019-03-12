@@ -35,3 +35,7 @@ RANDOM_NUMBERS_LST = random.sample(range(0, len(EMPLOYEES)), NUMBER_OF_GUESTS)
 
 for employee in RANDOM_NUMBERS_LST:
     GUESTS.append(EMPLOYEES[employee])
+
+print("The following employees were selected:")
+for employee in GUESTS:
+    print(employee)
