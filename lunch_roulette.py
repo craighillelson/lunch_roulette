@@ -44,6 +44,8 @@ RANDOM_NUMBERS_LST = random.sample(range(0, len(EMPLOYEES)),
 for employee in RANDOM_NUMBERS_LST:
     GUESTS.append(EMPLOYEES[employee])
 
+NOT_SELECTED = [employee for employee in EMPLOYEES if employee not in GUESTS]
+
 with open("guests.csv", "w") as out_file:
     OUT_CSV = csv.writer(out_file)
     OUT_CSV.writerow(["guest_email"])
@@ -52,4 +54,10 @@ with open("guests.csv", "w") as out_file:
 
 print("The following employees were selected:")
 for employee in GUESTS:
+    print(employee)
+
+print("\n")
+
+print("The following employees were not selected:")
+for employee in NOT_SELECTED:
     print(employee)
