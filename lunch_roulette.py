@@ -61,3 +61,9 @@ print("\n")
 print("The following employees were not selected:")
 for employee in NOT_SELECTED:
     print(employee)
+
+with open("not_selected.csv", "w") as out_file:
+    out_csv = csv.writer(out_file)
+    out_csv.writerow(["employee"])
+    for employee in NOT_SELECTED:
+        out_csv.writerow([employee])
