@@ -24,7 +24,9 @@ for email, level in EMPLOYEES_AND_EXECUTIVES.items():
         EMPLOYEES.append(email)
 
 for executive in EXECUTIVES:
-    executives_guests = executive.upper()+"s_guests".upper()
+    executives_guests = executive[:executive.find("@")].upper()+"S_GUESTS"
+
+print(executives_guests)
 
 while True:
     try:
