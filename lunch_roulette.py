@@ -26,8 +26,6 @@ for email, level in EMPLOYEES_AND_EXECUTIVES.items():
 for executive in EXECUTIVES:
     executives_guests = executive[:executive.find("@")].upper()+"S_GUESTS"
 
-print(executives_guests)
-
 while True:
     try:
         NUMBER_OF_GUESTS = int(input("How many guests would you "
