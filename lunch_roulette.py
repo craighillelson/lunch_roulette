@@ -46,6 +46,7 @@ for employee in RANDOM_NUMBERS_LST:
 
 NOT_SELECTED = [employee for employee in EMPLOYEES if employee not in GUESTS]
 
+# this could all be a function
 with open("guests.csv", "w") as out_file:
     OUT_CSV = csv.writer(out_file)
     OUT_CSV.writerow(["guest_email"])
@@ -68,4 +69,7 @@ with open("not_selected.csv", "w") as out_file:
     for employee in NOT_SELECTED:
         OUT_CSV.writerow([employee])
 
+print("\n")
+
+print("'guests.csv' exported successfully")
 print("'not_selected.csv' exported successfully")
