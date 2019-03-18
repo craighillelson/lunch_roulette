@@ -4,6 +4,28 @@ import csv
 import random
 from collections import namedtuple
 
+RTN = lambda: "\n"
+
+def output_selections(output_csv, output_lst, output_heading):
+    """ write results to csv, print same, and print a return for readability """
+    with open(output_csv, "w") as out_file:
+        out_csv = csv.writer(out_file)
+        out_csv.writerow(["email"])
+        for employee_email in output_lst:
+            out_csv.writerow([employee_email])
+
+    print(output_heading)
+    for employee_email in output_lst:
+        print(employee_email)
+
+    print(RTN())
+
+
+def update_user(results):
+    """ update user """
+    print(f"{results} exported successfully")
+
+
 EMPLOYEES_AND_EXECUTIVES = {}
 EXECUTIVES = []
 EMPLOYEES = []
@@ -34,6 +56,7 @@ while True:
             print(f"please enter a number less than or equal to "
                   f"{len(EMPLOYEES)}")
         else:
+            print(RTN())
             break
     except ValueError:
         print("Please enter an integer.")
@@ -46,30 +69,12 @@ for employee in RANDOM_NUMBERS_LST:
 
 NOT_SELECTED = [employee for employee in EMPLOYEES if employee not in GUESTS]
 
-# this could all be a function
-with open("guests.csv", "w") as out_file:
-    OUT_CSV = csv.writer(out_file)
-    OUT_CSV.writerow(["guest_email"])
-    for guest in GUESTS:
-        OUT_CSV.writerow([guest])
+output_selections("guests.csv", GUESTS,
+                  "The following employees were selected:")
+output_selections("not_selected.csv", NOT_SELECTED,
+                  "The following employees were not selected:")
 
-print("The following employees were selected:")
-for employee in GUESTS:
-    print(employee)
+update_user("guests.csv")
+update_user("not_selected.csv")
 
-print("\n")
-
-print("The following employees were not selected:")
-for employee in NOT_SELECTED:
-    print(employee)
-
-with open("not_selected.csv", "w") as out_file:
-    OUT_CSV = csv.writer(out_file)
-    OUT_CSV.writerow(["employee"])
-    for employee in NOT_SELECTED:
-        OUT_CSV.writerow([employee])
-
-print("\n")
-
-print("'guests.csv' exported successfully")
-print("'not_selected.csv' exported successfully")
+print(RTN())
