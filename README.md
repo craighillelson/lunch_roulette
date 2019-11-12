@@ -2,7 +2,7 @@
 
 Python 3.8 app to invite a user specified number of random guests to lunch based on a user supplied list.
 
-# instructions
+# Instructions
 
 1. Populate "employees_and_executives.csv" with employees and executives
 1. Save "lunch_roulette.py" to the same directory.
