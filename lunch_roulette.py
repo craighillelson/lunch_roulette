@@ -59,7 +59,7 @@ while True:
             print(RTN())
             break
     except ValueError:
-        print("Please enter an integer.")
+        print('Please enter an integer.')
 
 RANDOM_NUMBERS_LST = random.sample(range(0, len(EMPLOYEES)),
                                    NUMBER_OF_GUESTS)
