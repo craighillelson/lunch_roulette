@@ -3,14 +3,17 @@
 import csv
 import random
 from collections import namedtuple
+from datetime import date
 
 RTN = lambda: '\n'
+
+today = date.today()
 
 def output_selections(output_csv, output_lst, output_heading):
     """ write results to csv, print same, and print a return for readability """
     with open(output_csv, 'w') as out_file:
         out_csv = csv.writer(out_file)
-        out_csv.writerow(["email"])
+        out_csv.writerow(['email'])
         for employee_email in output_lst:
             out_csv.writerow([employee_email])
 
@@ -74,6 +77,7 @@ output_selections('guests.csv', GUESTS,
 output_selections('not_selected.csv', NOT_SELECTED,
                   'The following employees were not selected:')
 
+print(today)
 update_user('guests.csv')
 update_user('not_selected.csv')
 
