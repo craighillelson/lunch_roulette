@@ -4,6 +4,7 @@ import csv
 import random
 from collections import namedtuple
 from datetime import date
+from datetime import datetime
 
 RTN = lambda: '\n'
 
@@ -72,13 +73,16 @@ for employee in RANDOM_NUMBERS_LST:
 
 NOT_SELECTED = [employee for employee in EMPLOYEES if employee not in GUESTS]
 
-output_selections('guests.csv', GUESTS,
+today = date.today()
+today_formatted = datetime.strftime(today, '%Y-%m-%d')
+date_guests = today_formatted + '_guests.csv'
+
+output_selections(date_guests, GUESTS,
                   'The following employees were selected:')
 output_selections('not_selected.csv', NOT_SELECTED,
                   'The following employees were not selected:')
 
-print(today)
-update_user('guests.csv')
+update_user(date_guests)
 update_user('not_selected.csv')
 
 print(RTN())
