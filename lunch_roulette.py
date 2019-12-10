@@ -23,7 +23,7 @@ def output_selections(output_csv, output_lst, output_heading):
 
 def update_user(results):
     """ update user """
-    print(f"{results} exported successfully")
+    print(f'{results} exported successfully')
 
 
 EMPLOYEES_AND_EXECUTIVES = {}
