@@ -1,57 +1,33 @@
 """ __doc__ """
 
+# imports
 import csv
+import functions
 import random
-from collections import namedtuple
 from datetime import date
 from datetime import datetime
 
-RTN = lambda: '\n'
-
+# variables
 today = date.today()
 
-def output_selections(output_csv, output_lst, output_heading):
-    """ write results to csv, print same, and print a return for readability """
-    with open(output_csv, 'w') as out_file:
-        out_csv = csv.writer(out_file)
-        out_csv.writerow(['email'])
-        for employee_email in output_lst:
-            out_csv.writerow([employee_email])
-
-    print(output_heading)
-    for employee_email in output_lst:
-        print(employee_email)
-
-    print(RTN())
-
-
-def update_user(results):
-    """ update user """
-    print(f'{results} exported successfully')
-
-
+# data stores
 EMPLOYEES_AND_EXECUTIVES = {}
 EXECUTIVES = []
 EMPLOYEES = []
 GUESTS = []
+HOST = []
 
-with open('employees_and_executives.csv') as csv_file:
-    F_CSV = csv.reader(csv_file)
-    COLUMN_HEADINGS = next(F_CSV)
-    CSV_ROW = namedtuple('Row', COLUMN_HEADINGS)
-    for rows in F_CSV:
-        row = CSV_ROW(*rows)
-        EMPLOYEES_AND_EXECUTIVES[row.email] = row.level
+# populate dictionary with staff members and their respective levels
+functions.open_csv(EMPLOYEES_AND_EXECUTIVES)
 
+# separate users by into executives and employees
 for email, level in EMPLOYEES_AND_EXECUTIVES.items():
     if level == 'executive':
         EXECUTIVES.append(email)
     else:
         EMPLOYEES.append(email)
 
-for executive in EXECUTIVES:
-    executives_guests = executive[:executive.find('@')].upper()+'S_GUESTS'
-
+# prompt user for number of guests
 while True:
     try:
         NUMBER_OF_GUESTS = int(input('How many guests would you '
@@ -60,29 +36,46 @@ while True:
             print(f'please enter a number less than or equal to '
                   f'{len(EMPLOYEES)}')
         else:
-            print(RTN())
+            print(functions.RTN())
             break
     except ValueError:
         print('Please enter an integer.')
 
-RANDOM_NUMBERS_LST = random.sample(range(0, len(EMPLOYEES)),
-                                   NUMBER_OF_GUESTS)
+# populate a list of random numbers equal in length the number specified by user
+RANDOM_GUESTS = random.sample(range(0, len(EMPLOYEES)), NUMBER_OF_GUESTS)
 
-for employee in RANDOM_NUMBERS_LST:
-    GUESTS.append(EMPLOYEES[employee])
+# using the list of random numbers as indexes, populate a list of employees
+functions.append_list('employee', RANDOM_GUESTS, GUESTS, EMPLOYEES)
 
 NOT_SELECTED = [employee for employee in EMPLOYEES if employee not in GUESTS]
 
-today = date.today()
+# populate a list that includes one random number
+RANDOM_HOST = random.sample(range(0, len(EXECUTIVES)), 1)
+
+# using the list of random number as an index,
+# populate a list that includes one executive
+for executive in RANDOM_HOST:
+    exec_host = EXECUTIVES[executive]
+
+# format date
 today_formatted = datetime.strftime(today, '%Y-%m-%d')
-date_guests = today_formatted + '_guests.csv'
 
-output_selections(date_guests, GUESTS,
-                  'The following employees were selected:')
-output_selections('not_selected.csv', NOT_SELECTED,
-                  'The following employees were not selected:')
+# concatonate strings
+date_guests_csv = today_formatted + '_guests.csv'
+not_selected_csv = today_formatted + '_not_selected.csv'
 
-update_user(date_guests)
-update_user('not_selected.csv')
+# write results to a csv
+functions.write_to_csv(date_guests_csv, GUESTS) #,
+functions.write_to_csv(not_selected_csv, NOT_SELECTED)
 
-print(RTN())
+# update the user
+functions.output_selections(f'The following employees were selected to be '
+f'invited to lunch hosted by {exec_host}:', GUESTS)
+functions.output_selections('The following employees were not selected:',
+                            NOT_SELECTED)
+
+# update user
+functions.update_user(date_guests_csv)
+functions.update_user(not_selected_csv)
+
+print(functions.RTN())
