@@ -3,7 +3,7 @@
 # imports
 import csv
 from datetime import date
-from datetime import datetime
+from collections import namedtuple
 
 # functions and lambdas
 RTN = lambda: '\n'
@@ -13,6 +13,18 @@ EMPLOYEES_AND_EXECUTIVES = {}
 
 # variables
 today = date.today()
+
+# open csv and populate EMPLOYEES_AND_EXECUTIVES with its contents
+with open('employees_and_executives.csv') as csv_file:
+    F_CSV = csv.reader(csv_file)
+    COLUMN_HEADINGS = next(F_CSV)
+    CSV_ROW = namedtuple('Row', COLUMN_HEADINGS)
+    for rows in F_CSV:
+        row = CSV_ROW(*rows)
+        EMPLOYEES_AND_EXECUTIVES[row.employee] = row.level
+
+for employee, level in EMPLOYEES_AND_EXECUTIVES.items():
+    print(employee, level)
 
 # prompt user
 domain = input('What is your domain name?\n')
