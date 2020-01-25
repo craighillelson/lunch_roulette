@@ -12,7 +12,7 @@ def open_csv(a):
         CSV_ROW = namedtuple('Row', COLUMN_HEADINGS)
         for rows in F_CSV:
             row = CSV_ROW(*rows)
-            a[row.email] = row.level
+            a[row.employee] = row.level
 
 
 def append_list(a, b, c, d):
