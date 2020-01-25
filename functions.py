@@ -43,6 +43,7 @@ def write_list_to_csv(output_csv, output_lst):
 
 
 def output_selections(a, b):
+    """ print employees in list """
     print(a)
     for employee in b:
         print(employee)
