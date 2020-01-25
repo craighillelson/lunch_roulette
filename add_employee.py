@@ -2,6 +2,7 @@
 
 # imports
 import csv
+import functions
 from datetime import date
 from collections import namedtuple
 
