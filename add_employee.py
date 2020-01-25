@@ -15,13 +15,7 @@ EMPLOYEES_AND_EXECUTIVES = {}
 today = date.today()
 
 # open csv and populate EMPLOYEES_AND_EXECUTIVES with its contents
-with open('employees_and_executives.csv') as csv_file:
-    F_CSV = csv.reader(csv_file)
-    COLUMN_HEADINGS = next(F_CSV)
-    CSV_ROW = namedtuple('Row', COLUMN_HEADINGS)
-    for rows in F_CSV:
-        row = CSV_ROW(*rows)
-        EMPLOYEES_AND_EXECUTIVES[row.employee] = row.level
+functions.open_csv(EMPLOYEES_AND_EXECUTIVES)
 
 for employee, level in EMPLOYEES_AND_EXECUTIVES.items():
     print(employee, level)
