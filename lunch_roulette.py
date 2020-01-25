@@ -69,8 +69,8 @@ date_guests_csv = today_formatted + '_guests.csv'
 not_selected_csv = today_formatted + '_not_selected.csv'
 
 # write results to a csv
-functions.write_to_csv(date_guests_csv, GUESTS) #,
-functions.write_to_csv(not_selected_csv, NOT_SELECTED)
+functions.write_list_to_csv(date_guests_csv, GUESTS) #,
+functions.write_list_to_csv(not_selected_csv, NOT_SELECTED)
 
 # update the user
 functions.output_selections(f'The following employees were selected to be '
