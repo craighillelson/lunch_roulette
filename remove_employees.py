@@ -7,6 +7,7 @@ import functions
 EMPLOYEES_AND_EXECUTIVES = {}
 EMPLOYEES_AND_EXECUTIVES_UPDATED = {}
 
+# populate dictonary and provide options to user
 functions.open_csv('employees_and_executives.csv', EMPLOYEES_AND_EXECUTIVES)
 
 for i, (employee, level) in enumerate(EMPLOYEES_AND_EXECUTIVES.items(), 1):
