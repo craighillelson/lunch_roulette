@@ -1,5 +1,7 @@
 """ __doc__ """
 
+# adapt add_employee from on-call
+
 # imports
 import csv
 import functions
