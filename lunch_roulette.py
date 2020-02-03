@@ -8,7 +8,7 @@ from datetime import date
 from datetime import datetime
 
 # variables
-today = date.today()
+TODAYS_DATE = date.today()
 
 # data stores
 EMPLOYEES_AND_EXECUTIVES = {}
@@ -22,7 +22,7 @@ HOST = []
 #     executives_guests = executive[:executive.find('@')].upper()+'S_GUESTS'
 
 # populate dictionary with staff members and their respective levels
-functions.open_csv(EMPLOYEES_AND_EXECUTIVES)
+functions.open_csv('employees_and_executives.csv', EMPLOYEES_AND_EXECUTIVES)
 
 # separate users by into executives and employees
 for email, level in EMPLOYEES_AND_EXECUTIVES.items():
@@ -62,11 +62,11 @@ for executive in RANDOM_HOST:
     exec_host = EXECUTIVES[executive]
 
 # format date
-today_formatted = datetime.strftime(today, '%Y-%m-%d')
+TODAYS_DATE_FORMATTED = datetime.strftime(TODAYS_DATE, '%Y-%m-%d')
 
 # concatonate strings
-date_guests_csv = today_formatted + '_guests.csv'
-not_selected_csv = today_formatted + '_not_selected.csv'
+date_guests_csv = TODAYS_DATE_FORMATTED + '_guests.csv'
+not_selected_csv = TODAYS_DATE_FORMATTED + '_not_selected.csv'
 
 # write results to a csv
 functions.write_list_to_csv(date_guests_csv, GUESTS) #,
@@ -74,7 +74,7 @@ functions.write_list_to_csv(not_selected_csv, NOT_SELECTED)
 
 # update the user
 functions.output_selections(f'The following employees were selected to be '
-f'invited to lunch hosted by {exec_host}:', GUESTS)
+                            f'invited to lunch hosted by {exec_host}:', GUESTS)
 functions.output_selections('The following employees were not selected:',
                             NOT_SELECTED)
 
