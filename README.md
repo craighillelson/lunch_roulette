@@ -5,10 +5,10 @@ Python 3.8 app to invite a user specified number of random guests to lunch based
 # Files
 1. add_employee.py
 1. employees_and_executives.csv
-1. employees_and_executives_backup.csv
 1. functions.py
 1. guests.csv
 1. lunch_roulette.py
+1. menu.py
 1. not_selected.csv
 1. remove_employees.py
 
