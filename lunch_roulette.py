@@ -14,7 +14,6 @@ TODAYS_DATE = date.today()
 EMPLOYEES_AND_EXECUTIVES = {}
 EXECUTIVES = []
 EMPLOYEES = []
-GUESTS = []
 HOST = []
 
 # strip '@' and domain from email address
@@ -49,7 +48,7 @@ while True:
 RANDOM_GUESTS = random.sample(range(0, len(EMPLOYEES)), NUMBER_OF_GUESTS)
 
 # using the list of random numbers as indexes, populate a list of employees
-functions.append_list('employee', RANDOM_GUESTS, GUESTS, EMPLOYEES)
+functions.append_list('email', RANDOM_GUESTS, GUESTS, EMPLOYEES)
 
 NOT_SELECTED = [employee for employee in EMPLOYEES if employee not in GUESTS]
 
