@@ -6,9 +6,6 @@ import functions
 from datetime import date
 from collections import namedtuple
 
-# functions and lambdas
-# RTN = lambda: '\n'
-
 # data stores
 EMPLOYEES_AND_EXECUTIVES = {}
 EMPLOYEES_TO_ADD = {}
@@ -17,7 +14,7 @@ EMPLOYEES_TO_ADD = {}
 today = date.today()
 
 # open csv and populate EMPLOYEES_AND_EXECUTIVES with its contents
-functions.open_csv('employees_and_executives.csv', EMPLOYEES_AND_EXECUTIVES)
+EMPLOYEES_AND_EXECUTIVES = functions.open_csv('employees_and_executives.csv')
 
 for employee, level in EMPLOYEES_AND_EXECUTIVES.items():
     print(employee, level)
@@ -44,15 +41,7 @@ while True:
 # populate dictionary with user input
 EMPLOYEES_AND_EXECUTIVES[email] = level
 
-# write user input to 'employees_and_executives.csv'
-HEADERS = 'email','level'
-
-with open('employees_and_executives.csv', 'w') as out_file:
-    out_csv = csv.writer(out_file)
-    out_csv.writerow(HEADERS)
-    for email, level in EMPLOYEES_AND_EXECUTIVES.items():
-        keys_values = (email, level)
-        out_csv.writerow(keys_values)
+functions.write_dct_to_csv(EMPLOYEES_AND_EXECUTIVES)
 
 # update user
 for email, level in EMPLOYEES_TO_ADD.items():
