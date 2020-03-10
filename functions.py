@@ -7,8 +7,10 @@ RTN = lambda: '\n'
 
 GUESTS = []
 
-def open_csv(file, DCT):
+def open_csv(file):
     """ open csv and populate a dictionary with its contents """
+    DCT = {}
+
     with open(file) as csv_file:
         F_CSV = csv.reader(csv_file)
         COLUMN_HEADINGS = next(F_CSV)
@@ -16,6 +18,8 @@ def open_csv(file, DCT):
         for rows in F_CSV:
             row = CSV_ROW(*rows)
             DCT[row.email] = row.level
+
+    return DCT
 
 
 def append_list(a, b, c, d):
@@ -59,5 +63,5 @@ def update_user(results):
 
 
 def open_file(a):
-    """ """
+    """ open python script in response to user selection """
     exec(open(a).read())
