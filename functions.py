@@ -7,6 +7,9 @@ RTN = lambda: '\n'
 
 GUESTS = []
 
+def print_return():
+    print('\n')
+
 def open_csv(file):
     """ open csv and populate a dictionary with its contents """
     DCT = {}
