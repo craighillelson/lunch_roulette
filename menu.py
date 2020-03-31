@@ -21,6 +21,6 @@ print('b - build a lunch guest list')
 print('c - remove employees')
 
 while True:
-    usr_choice = input()
+    usr_choice = input('> ')
     functions.open_file(switch_case(options, usr_choice))
     break
