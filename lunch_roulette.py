@@ -71,7 +71,7 @@ date_guests_csv = TODAYS_DATE_FORMATTED + '_guests.csv'
 not_selected_csv = TODAYS_DATE_FORMATTED + '_not_selected.csv'
 
 # write results to a csv
-functions.write_list_to_csv(date_guests_csv, GUESTS) #,
+functions.write_list_to_csv(date_guests_csv, GUESTS)
 functions.write_list_to_csv(not_selected_csv, NOT_SELECTED)
 
 # update the user
