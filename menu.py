@@ -1,15 +1,16 @@
-""" __doc__ """
+"""Provide a list of options to the user."""
 
 import functions
 
 options = {
     'a': 'add_employees.py',
-    'b': 'lunch_roulette.py',
-    'c': 'remove_employees.py',
+    'b': 'list_employees.py',
+    'c': 'lunch_roulette.py',
+    'd': 'remove_employees.py',
 }
 
 def switch_case(a, b):
-    """ switch case statement """
+    """Switch case statement."""
     options
     return options.get(b, 'nothing')
 
@@ -17,8 +18,9 @@ print(functions.RTN())
 
 print('please select an option below')
 print('a - add employees')
-print('b - build a lunch guest list')
-print('c - remove employees')
+print('b - list employees')
+print('c - build a lunch guest list')
+print('d - remove employees')
 
 while True:
     usr_choice = input('> ')
