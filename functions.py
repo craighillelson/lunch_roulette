@@ -1,4 +1,4 @@
-""" __doc__ """
+"""Lunch roulette functions."""
 
 import csv
 import pyinputplus as pyip
