@@ -15,7 +15,7 @@ def print_return():
 
 
 def open_csv(file):
-    """ open a csv and populate a dictionary with its contents """
+    """Open a csv and populate a dictionary with its contents."""
     DCT = {}
 
     with open(file) as csv_file:
@@ -30,13 +30,13 @@ def open_csv(file):
 
 
 def append_list(a, b, c, d):
-    """ adds selections to a list """
+    """Add user selection to a list."""
     for a in b:
         c.append(d[a])
 
 
 def write_dct_to_csv(a):
-    """ write dictionary to csv """
+    """Write dictionary to csv."""
     HEADERS = 'email','level'
     with open('employees_and_executives.csv', 'w') as out_file:
         out_csv = csv.writer(out_file)
@@ -47,7 +47,7 @@ def write_dct_to_csv(a):
 
 
 def write_list_to_csv(output_csv, output_lst):
-    """ write results to csv, print same, and print a return for readability """
+    """Write results to csv. Print same and print a return for readability."""
     with open(output_csv, 'w') as out_file:
         out_csv = csv.writer(out_file)
         out_csv.writerow(['email'])
@@ -77,10 +77,10 @@ def output_not_selected(a):
 
 
 def update_user(results):
-    """ update user """
+    """Update user."""
     print(f'{results} exported successfully')
 
 
 def open_file(a):
-    """ open python script in response to user selection """
+    """Open python script in response to user selection."""
     exec(open(a).read())
