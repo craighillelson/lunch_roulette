@@ -1,6 +1,4 @@
-"""
-Give user the ability to add employees to the 'employees_and_executives.csv.'
-"""
+"""Add employees to 'employees_and_executives.csv'."""
 
 import csv
 import functions
@@ -14,15 +12,16 @@ today = date.today()
 
 EMPLOYEES_AND_EXECUTIVES = functions.open_csv('employees_and_executives.csv')
 
+print('\nemployees and executives')
 for employee, level in EMPLOYEES_AND_EXECUTIVES.items():
     print(employee, level)
 
 print(functions.RTN())
 
-domain = input('What is your domain name?\n')
+domain = input('What is your domain name?\n> ')
 
 while True:
-    print('Enter the employee\'s name (or \'return\' to stop.):')
+    print('\nEnter the employee\'s name (or \'return\' to stop.):')
     email_prefix = input()
     if email_prefix == '':
         break
