@@ -1,4 +1,4 @@
-""" __doc__ """
+"""Remove employees from 'employees_and_executives.csv'."""
 
 # import
 import functions
