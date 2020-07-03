@@ -9,6 +9,7 @@ RTN = lambda: '\n'
 
 GUESTS = []
 
+
 def print_return():
     """Print a return."""
     print('\n')
@@ -30,7 +31,7 @@ def open_csv(file):
 
 
 def append_list(a, b, c, d):
-    """Add user selection to a list."""
+    """Adds selections to a list."""
     for a in b:
         c.append(d[a])
 
@@ -47,7 +48,7 @@ def write_dct_to_csv(a):
 
 
 def write_list_to_csv(output_csv, output_lst):
-    """Write results to csv. Print same and print a return for readability."""
+    """Write results to csv, print same, and print a return for readability."""
     with open(output_csv, 'w') as out_file:
         out_csv = csv.writer(out_file)
         out_csv.writerow(['email'])
