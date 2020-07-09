@@ -2,6 +2,7 @@
 
 import csv
 import functions
+import pyinputplus as pyip
 from datetime import date
 from collections import namedtuple
 
@@ -13,21 +14,19 @@ today = date.today()
 EMPLOYEES_AND_EXECUTIVES = functions.open_csv('employees_and_executives.csv')
 
 print('\nemployees and executives')
-for employee, level in EMPLOYEES_AND_EXECUTIVES.items():
+for employee, level in sorted(EMPLOYEES_AND_EXECUTIVES.items()):
     print(employee, level)
 
-print(functions.RTN())
-
-domain = input('What is your domain name?\n> ')
+domain = input('\nWhat is your domain name?\n> ')
 
 while True:
     print('\nEnter the employee\'s name (or \'return\' to stop.):')
-    email_prefix = input()
+    email_prefix = input('> ')
     if email_prefix == '':
         break
     email = email_prefix + '@' + domain
-    exec = input('Is the employee an executive (y/n)?\n')
-    if exec == 'y':
+    exec = pyip.inputYesNo('Is the employee an executive (yes/no)?\n> ')
+    if exec == 'yes':
         level = 'executive'
     else:
         level = 'employee'
