@@ -1,28 +1,27 @@
 """Provide a list of options to the user."""
 
 import functions
+import pyinputplus as pyip
 
 options = {
-    'a': 'add_employees.py',
-    'b': 'list_employees.py',
-    'c': 'lunch_roulette.py',
-    'd': 'remove_employees.py',
+    1: 'add_employees.py',
+    2: 'list_employees.py',
+    3: 'lunch_roulette.py',
+    4: 'remove_employees.py',
 }
 
-def switch_case(a, b):
+def switch_case(argument):
     """Switch case statement."""
     options
-    return options.get(b, 'nothing')
-
-print(functions.RTN())
-
-print('please select an option below')
-print('a - add employees')
-print('b - list employees')
-print('c - build a lunch guest list')
-print('d - remove employees')
+    return options.get(argument, 'nothing')
 
 while True:
-    usr_choice = input('> ')
-    functions.open_file(switch_case(options, usr_choice))
-    break
+    print('\nMake a selection or press enter to quit')
+    for num, option in options.items():
+        print(num, option)
+    usr_choice = pyip.inputInt('> ', min=1, max=len(options), blank=True)
+    if usr_choice != '':
+        exec(open(switch_case(usr_choice)).read())
+    else:
+        print('\nSession complete.\n')
+        break
