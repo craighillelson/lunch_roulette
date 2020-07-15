@@ -13,10 +13,8 @@ EMPLOYEES_AND_EXECUTIVES = functions.open_csv('employees_and_executives.csv')
 for i, (email, level) in enumerate(EMPLOYEES_AND_EXECUTIVES.items(), 1):
     print(f'{i} {email} {level}')
 
-print(functions.RTN())
-
 # prompt user
-del_emp = input('select an employee to remove from list\n')
+del_emp = input('\nselect an employee to remove from list\n')
 
 for i, (email, level) in enumerate(EMPLOYEES_AND_EXECUTIVES.items(), 1):
     if del_emp != email:
@@ -33,8 +31,4 @@ for i, (email, level) in enumerate(EMPLOYEES_AND_EXECUTIVES_UPDATED.items(), 1):
 
 functions.write_dct_to_csv(EMPLOYEES_AND_EXECUTIVES_UPDATED)
 
-print(functions.RTN())
-
-print('"employees_and_executives.csv" updated successfully')
-
-print(functions.RTN())
+print('\n"employees_and_executives.csv" updated successfully\n')
