@@ -31,7 +31,7 @@ def open_csv(file):
 
 
 def append_list(a, b, c, d):
-    """Adds selections to a list."""
+    """Add selections to a list."""
     for a in b:
         c.append(d[a])
 
