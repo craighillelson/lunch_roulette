@@ -17,10 +17,7 @@ EMPLOYEES_AND_EXECUTIVES = {}
 EXECUTIVES = []
 EMPLOYEES = []
 HOST = []
-
-# strip '@' and domain from email address
-# for executive in EXECUTIVES:
-#     executives_guests = executive[:executive.find('@')].upper()+'S_GUESTS'
+GUESTS = []
 
 # populate dictionary with staff members and their respective levels
 EMPLOYEES_AND_EXECUTIVES = functions.open_csv('employees_and_executives.csv')
