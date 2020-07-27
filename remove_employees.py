@@ -1,34 +1,28 @@
-"""Remove employees from 'employees_and_executives.csv'."""
+"""Remove employees from csv."""
 
-# import
 import functions
 
-# data stores
-EMPLOYEES_AND_EXECUTIVES = {}
-EMPLOYEES_AND_EXECUTIVES_UPDATED = {}
+employees_and_executives = functions.open_csv_pop_dct_namedtuple()
+list_of_employees = list(employees_and_executives.keys())
 
-# populate dictonary and provide options to user
-EMPLOYEES_AND_EXECUTIVES = functions.open_csv('employees_and_executives.csv')
+print('\nEmployees')
+for num, email in enumerate(list_of_employees, 1):
+    print(num, email)
 
-for i, (email, level) in enumerate(EMPLOYEES_AND_EXECUTIVES.items(), 1):
-    print(f'{i} {email} {level}')
+employees_to_remove = []
 
-# prompt user
-del_emp = input('\nselect an employee to remove from list\n')
-
-for i, (email, level) in enumerate(EMPLOYEES_AND_EXECUTIVES.items(), 1):
-    if del_emp != email:
-        EMPLOYEES_AND_EXECUTIVES_UPDATED[email] = level
+while True:
+    print('\nPlease select an employee to remove or nothing to quit.')
+    selection = functions.pyip.inputMenu(list_of_employees, prompt='> ',
+                                         blank=True, numbered=True)
+    if selection != '':
+        employees_to_remove.append(selection)
     else:
-        pass
+        break
 
-print(functions.RTN())
+updated_employees = functions.remove_selected_employees(employees_and_executives, employees_to_remove)
 
-# update user
-print('updated list')
-for i, (email, level) in enumerate(EMPLOYEES_AND_EXECUTIVES_UPDATED.items(), 1):
-    print(i, email, level)
+for email, level in updated_employees.items():
+    print(email, level)
 
-functions.write_dct_to_csv(EMPLOYEES_AND_EXECUTIVES_UPDATED)
-
-print('\n"employees_and_executives.csv" updated successfully\n')
+functions.write_employees_to_csv(functions.EMPLOYEES_CSV, updated_employees)
