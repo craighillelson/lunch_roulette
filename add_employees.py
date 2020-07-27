@@ -1,45 +1,32 @@
-"""Add employees to 'employees_and_executives.csv'."""
+"""Add employees to csv."""
 
-import csv
 import functions
 import pyinputplus as pyip
-from datetime import date
-from collections import namedtuple
+import random
 
-EMPLOYEES_AND_EXECUTIVES = {}
-EMPLOYEES_TO_ADD = {}
+employees_and_executives = functions.open_csv_pop_dct_namedtuple()
 
-today = date.today()
-
-EMPLOYEES_AND_EXECUTIVES = functions.open_csv('employees_and_executives.csv')
-
-print('\nemployees and executives')
-for employee, level in sorted(EMPLOYEES_AND_EXECUTIVES.items()):
-    print(employee, level)
-
-domain = input('\nWhat is your domain name?\n> ')
-
+emails_to_add = {}
 while True:
-    print('\nEnter the employee\'s name (or \'return\' to stop.):')
-    email_prefix = input('> ')
-    if email_prefix == '':
-        break
-    email = email_prefix + '@' + domain
-    exec = pyip.inputYesNo('Is the employee an executive (yes/no)?\n> ')
-    if exec == 'yes':
-        level = 'executive'
+    print('\nenter an eamil address or enter nothing to quit')
+    email = pyip.inputEmail('> ', blank=True)
+    if email != '':
+        if email not in employees_and_executives.keys():
+            level = pyip.inputYesNo('is this employee an executive?\n> ')
+            if level != 'yes':
+                level = 'employee'
+            else:
+                level = 'executive'
+            emails_to_add[email] = level
+        else:
+            print('email already in csv')
     else:
-        level = 'employee'
-    EMPLOYEES_AND_EXECUTIVES[email] = level
-    EMPLOYEES_TO_ADD[email] = level
+        break
 
-EMPLOYEES_AND_EXECUTIVES[email] = level
+employees_and_executives_updated = {**employees_and_executives, **emails_to_add}
+print('\n')
+for email, level in  employees_and_executives_updated.items():
+    print(email, level)
 
-functions.write_dct_to_csv(EMPLOYEES_AND_EXECUTIVES)
-
-for email, level in EMPLOYEES_TO_ADD.items():
-    print('employee added')
-    print(f'key: {email}')
-    print(f'value: {level}')
-
-print(functions.RTN())
+functions.write_employees_to_csv(functions.EMPLOYEES_CSV,
+                                 employees_and_executives_updated)
