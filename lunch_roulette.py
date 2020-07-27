@@ -1,82 +1,51 @@
 """
-In response to user input, build a list of random employees to go to lunch
-with a random executive host.
+Select executives and a number of random employees to go to lunch together.
 """
 
-# imports
-import csv
 import functions
-# import pyinputplus as pyip
 import random
 from datetime import date
-from datetime import datetime
 
-TODAYS_DATE = date.today()
-
-EMPLOYEES_AND_EXECUTIVES = {}
-EXECUTIVES = []
-EMPLOYEES = []
-HOST = []
-GUESTS = []
-
-# populate dictionary with staff members and their respective levels
-EMPLOYEES_AND_EXECUTIVES = functions.open_csv('employees_and_executives.csv')
-
-# separate users by into executives and employees
-for email, level in EMPLOYEES_AND_EXECUTIVES.items():
-    if level == 'executive':
-        EXECUTIVES.append(email)
-    else:
-        EMPLOYEES.append(email)
-
-functions.print_return()
+today = date.today()
 
 while True:
-    try:
-        NUMBER_OF_GUESTS = pyip.inputInt(prompt='How many guests would you '
-                                         'like to invite?\n> ')
-        if NUMBER_OF_GUESTS > len(EMPLOYEES):
-            print(f'please enter a number less than or equal to '
-                  f'{len(EMPLOYEES)}')
-        else:
-            functions.print_return()
-            break
-    except ValueError:
-        print('Please enter an integer.')
+    lunch_date = functions.pyip.inputDate(prompt='\nPlease enter a date for '
+                                          'lunch in \'YYYY-MM-DD\' format\n> ',
+                                          formats=['%Y-%m-%d'])
+    if lunch_date <= today:
+        print('Please select a date in the future')
+    elif functions.not_a_weekend(lunch_date) == False:
+        print('Please select a date that doesn\'t fall on a weekend.')
+    else:
+        break
 
-# populate a list of random numbers equal in length the number specified by user
-RANDOM_GUESTS = random.sample(range(0, len(EMPLOYEES)), NUMBER_OF_GUESTS)
+employeess_and_executives = functions.open_csv_pop_dct_namedtuple()
 
-# using the list of random numbers as indexes, populate a list of employees
-functions.append_list('email', RANDOM_GUESTS, GUESTS, EMPLOYEES)
+employees = []
+executives = []
+for email, level in employeess_and_executives.items():
+    if level != 'executive':
+        employees.append(email)
+    else:
+        executives.append(email)
 
-NOT_SELECTED = [employee for employee in EMPLOYEES if employee not in GUESTS]
+user_selected_executive = functions.select_an_executive(executives)
 
-# populate a list that includes one random number
-RANDOM_HOST = random.sample(range(0, len(EXECUTIVES)), 1)
+number_of_guests = functions.prompt_user_for_number_guests_to_invite()
 
-# using the list of random number as an index,
-# populate a list that includes one executive
-for executive in RANDOM_HOST:
-    exec_host = EXECUTIVES[executive]
+random_guests = random.sample(range(0, len(employees)), number_of_guests)
+print(f'\nsuggested lunch guests to join {user_selected_executive} on '
+      f'{lunch_date}')
 
-# format date
-TODAYS_DATE_FORMATTED = datetime.strftime(TODAYS_DATE, '%Y-%m-%d')
+guests = []
 
-# concatonate strings
-date_guests_csv = TODAYS_DATE_FORMATTED + '_guests.csv'
-not_selected_csv = TODAYS_DATE_FORMATTED + '_not_selected.csv'
+for guest in random_guests:
+    guests.append(employees[guest])
 
-# write results to a csv
-functions.write_list_to_csv(date_guests_csv, GUESTS)
-functions.write_list_to_csv(not_selected_csv, NOT_SELECTED)
+for num, email in enumerate(guests, 1):
+    print(num, email)
 
-# update the user
-functions.output_selected(exec_host, GUESTS)
-functions.output_not_selected(NOT_SELECTED)
+functions.output_employees_not_selected(employees, guests)
 
-# update user
-functions.update_user(date_guests_csv)
-functions.update_user(not_selected_csv)
-
-functions.print_return()
+guest_list = str(lunch_date) + '_' + str(user_selected_executive) + '.csv'
+functions.write_lst_to_csv(guest_list, guests)
