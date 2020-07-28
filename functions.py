@@ -88,7 +88,7 @@ def write_employees_to_csv(file, DCT):
             keys_values = (email, level)
             out_csv.writerow(keys_values)
 
-    print(f'"{file}" exported successfully')
+    print(f'\n"{file}" exported successfully')
 
 
 def write_lst_to_csv(file, lst):
@@ -98,7 +98,7 @@ def write_lst_to_csv(file, lst):
     with open(file, 'w') as out_file:
         out_csv = csv.writer(out_file)
         out_csv.writerow(['guests'])
-        for i in lst: # rename i to make it meaningful
-            out_csv.writerow([i])
+        for email in lst:
+            out_csv.writerow([email])
 
         print(f'\n"{file}" exported successfully')
