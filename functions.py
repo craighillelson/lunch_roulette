@@ -46,7 +46,7 @@ def output_employees_and_executives(dct):
     print('\n')
     print('email,level')
     for email, level in dct.items():
-        print(email, level)
+        print(f'{email},{level}')
 
 
 def prompt_user_for_number_guests_to_invite():
