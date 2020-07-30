@@ -1,6 +1,7 @@
 """Remove employees from csv."""
 
 import functions
+from functions import EMPLOYEES_CSV
 
 employees_and_executives = functions.open_csv_pop_dct_namedtuple()
 list_of_employees = list(employees_and_executives.keys())
@@ -20,9 +21,11 @@ while True:
     else:
         break
 
-updated_employees = functions.remove_selected_employees(employees_and_executives, employees_to_remove)
+updated_employees = functions.remove_selected_employees(
+    employees_and_executives,
+    employees_to_remove)
 
 for email, level in updated_employees.items():
     print(email, level)
 
-functions.write_employees_to_csv(functions.EMPLOYEES_CSV, updated_employees)
+functions.write_employees_to_csv(EMPLOYEES_CSV, updated_employees)
