@@ -1,6 +1,7 @@
-"""List employees and executives."""
+"""List employees."""
 
-import functions
+from functions import (open_csv_pop_dct_namedtuple,
+                       output_employees_and_executives)
 
-employees_and_executives = functions.open_csv_pop_dct_namedtuple()
-functions.output_employees_and_executives(employees_and_executives)
+employees_and_executives = open_csv_pop_dct_namedtuple()
+output_employees_and_executives(employees_and_executives)
