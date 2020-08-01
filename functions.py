@@ -5,6 +5,30 @@ import pyinputplus as pyip
 EMPLOYEES_CSV = 'csvs/employees_and_executives.csv'
 
 
+def add_email_if_not_in_dct(str1, dct1, dct2, dct3, str2):
+    """
+    If email entered by user isn't already in the csv, add email to
+    emails_to_add dictionary.
+    """
+    if str1 not in dct1.keys():
+        dct2[str1] = dct3[str2]
+    else:
+        print('email already in csv')
+
+
+def check_if_already_in_csv():
+    """Check to see if what the user entered is already in the csv."""
+    if email_address_to_add not in employees_and_executives.keys():
+        emails_to_add[email_address_to_add] = LEVEL_MAP[level]
+    else:
+        print('email already in csv')
+
+
+def concat_prefix_and_domain(str1, str2):
+    """Concatenate email prefix, '@' symbol, and domain."""
+    return str1 + '@' + str2
+
+
 def not_a_weekend(user_specified_date):
     """Determine if the date entered is not a weekday."""
     import datetime
@@ -47,6 +71,12 @@ def output_employees_and_executives(dct):
     print('email,level')
     for email, level in dct.items():
         print(f'{email},{level}')
+
+
+def prompt_user_for_email_prefix():
+    """Prompt user for email prefix."""
+    return pyip.inputStr('\nenter the user\'s email prefix or nothing to quit'
+                         '\n> ', blank=True)
 
 
 def prompt_user_for_number_guests_to_invite():

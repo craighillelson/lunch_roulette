@@ -5,24 +5,46 @@ import pyinputplus as pyip
 import random
 
 employees_and_executives = functions.open_csv_pop_dct_namedtuple()
-emails_to_add = {}
 
 LEVEL_MAP = {
     'yes': 'executive',
     'no': 'employee',
     }
 
-while True:
-    print('\nenter an eamil address or enter nothing to quit')
-    email = pyip.inputEmail('> ', blank=True)
-    if email == '':
-        break
+email_addresses = list(employees_and_executives.keys())
+domain = email_addresses[0].split('@')[1]
+domain_answer = pyip.inputYesNo(f'\nIs {domain} the domain name for users '
+                                'you\'d like to add?\n> ')
+emails_to_add = {}
 
-    if email not in employees_and_executives.keys():
+if domain_answer == 'yes':
+    while True:
+        email_prefix = functions.prompt_user_for_email_prefix()
+        if email_prefix == '':
+            break
+
+        email_address_to_add = functions.concat_prefix_and_domain(email_prefix,
+                                                                  domain)
         level = functions.pyip.inputYesNo('is this employee an executive?\n> ')
-        emails_to_add[email] = LEVEL_MAP[level]
-    else:
-        print('email already in csv')
+        functions.add_email_if_not_in_dct(email_address_to_add,
+                                          employees_and_executives,
+                                          emails_to_add,
+                                          LEVEL_MAP, level)
+else:
+    domain = pyip.inputStr('Please enter the domain name associated with '
+                           'the users you\'d like to add\n> ')
+    while True:
+        email_prefix = functions.prompt_user_for_email_prefix()
+        if email_prefix == '':
+            break
+
+        level = functions.pyip.inputYesNo('is this employee an executive?\n> ')
+        email_address_to_add = functions.concat_prefix_and_domain(email_prefix,
+                                                                  domain)
+        functions.add_email_if_not_in_dct(email_address_to_add,
+                                          employees_and_executives,
+                                          emails_to_add,
+                                          LEVEL_MAP, level)
 
 employees_and_executives_updated = {**employees_and_executives, **emails_to_add}
 print('\n')
