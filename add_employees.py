@@ -1,7 +1,6 @@
 """Add employees to csv."""
 
 import functions
-import pyinputplus as pyip
 import random
 
 employees_and_executives = functions.open_csv_pop_dct_namedtuple()
@@ -13,8 +12,8 @@ LEVEL_MAP = {
 
 email_addresses = list(employees_and_executives.keys())
 domain = email_addresses[0].split('@')[1]
-domain_answer = pyip.inputYesNo(f'\nIs {domain} the domain name for users '
-                                'you\'d like to add?\n> ')
+domain_answer = functions.pyip.inputYesNo(f'\nIs {domain} the domain name for '
+                                          'users you\'d like to add?\n> ')
 emails_to_add = {}
 
 if domain_answer == 'yes':
