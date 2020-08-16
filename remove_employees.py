@@ -1,31 +1,33 @@
 """Remove employees from csv."""
 
-import functions
-from functions import EMPLOYEES_CSV
+import pyinputplus as pyip
+from functions import (open_csv_pop_dct_namedtuple,
+                       remove_selected_employees,
+                       EMPLOYEES_CSV,
+                       write_employees_to_csv)
 
-employees_and_executives = functions.open_csv_pop_dct_namedtuple()
-list_of_employees = list(employees_and_executives.keys())
+EMPLOYEES_AND_EXECUTIVES = open_csv_pop_dct_namedtuple()
+LIST_OF_EMPLOYEES = list(EMPLOYEES_AND_EXECUTIVES.keys())
 
 print('\nEmployees')
-for num, email in enumerate(list_of_employees, 1):
+for num, email in enumerate(LIST_OF_EMPLOYEES, 1):
     print(num, email)
 
-employees_to_remove = []
+EMPLOYEES_TO_REMOVE = []
 
 while True:
     print('\nPlease select an employee to remove or nothing to quit.')
-    selection = functions.pyip.inputMenu(list_of_employees, prompt='> ',
-                                         blank=True, numbered=True)
-    if selection != '':
-        employees_to_remove.append(selection)
+    SELECTION = pyip.inputMenu(LIST_OF_EMPLOYEES, prompt='> ',
+                               blank=True, numbered=True)
+    if SELECTION != '':
+        EMPLOYEES_TO_REMOVE.append(SELECTION)
     else:
         break
 
-updated_employees = functions.remove_selected_employees(
-    employees_and_executives,
-    employees_to_remove)
+UPDATED_EMPLOYEES = remove_selected_employees(EMPLOYEES_AND_EXECUTIVES,
+                                              EMPLOYEES_TO_REMOVE)
 
-for email, level in updated_employees.items():
+for email, level in UPDATED_EMPLOYEES.items():
     print(email, level)
 
-functions.write_employees_to_csv(EMPLOYEES_CSV, updated_employees)
+write_employees_to_csv(EMPLOYEES_CSV, UPDATED_EMPLOYEES)
