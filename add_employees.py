@@ -1,13 +1,12 @@
 """Add employees to csv."""
 
+import pyinputplus as pyip
 from functions import (open_csv_pop_dct_namedtuple,
                        prompt_user_for_email_prefix,
                        concat_prefix_and_domain,
                        add_email_if_not_in_dct,
                        write_employees_to_csv,
                        EMPLOYEES_CSV)
-import pyinputplus as pyip
-import random
 
 employees_and_executives = open_csv_pop_dct_namedtuple()
 
