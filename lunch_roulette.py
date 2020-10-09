@@ -2,9 +2,9 @@
 Select executives and a number of random employees to go to lunch together.
 """
 
-import functions
-import random
 from datetime import date
+import random
+import functions
 
 today = date.today()
 
@@ -14,7 +14,7 @@ while True:
                                           formats=["%Y-%m-%d"])
     if lunch_date <= today:
         print("Please select a date in the future")
-    elif functions.not_a_weekend(lunch_date) == False:
+    elif not functions.not_a_weekend(lunch_date):
         print("Please select a date that doesn't fall on a weekend.")
     else:
         break
@@ -47,5 +47,5 @@ for num, email in enumerate(guests, 1):
 
 functions.output_employees_not_selected(employees, guests)
 
-guest_list = str(lunch_date) + "_" + str(user_selected_executive) + ".csv"
-functions.write_lst_to_csv(guest_list, guests)
+GUEST_LIST = str(lunch_date) + "_" + str(user_selected_executive) + ".csv"
+functions.write_lst_to_csv(GUEST_LIST, guests)
