@@ -130,7 +130,6 @@ def write_employees_to_csv(file, DCT):
 
 
 def write_lst_to_csv(file, lst):
-    """Write list to csv """
 
     with open(file, 'w') as out_file:
         out_csv = csv.writer(out_file)
