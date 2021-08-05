@@ -7,10 +7,6 @@ EMPLOYEES_CSV = "csvs/employees_and_executives.csv"
 
 
 def add_email_if_not_in_dct(str1, dct1, dct2, dct3, str2):
-    """
-    If email entered by user isn't already in the csv, add email to
-    emails_to_add dictionary.
-    """
     
     if str1 not in dct1.keys():
         dct2[str1] = dct3[str2]
@@ -19,7 +15,6 @@ def add_email_if_not_in_dct(str1, dct1, dct2, dct3, str2):
 
 
 def check_if_already_in_csv():
-    """Check to see if what the user entered is already in the csv."""
     
     if email_address_to_add not in employees_and_executives.keys():
         emails_to_add[email_address_to_add] = LEVEL_MAP[level]
@@ -28,12 +23,10 @@ def check_if_already_in_csv():
 
 
 def concat_prefix_and_domain(str1, str2):
-    """Concatenate email prefix, '@' symbol, and domain."""
     return str1 + '@' + str2
 
 
 def not_a_weekend(user_specified_date):
-    """Determine if the date entered is not a weekday."""
     
     import datetime
 
@@ -42,7 +35,6 @@ def not_a_weekend(user_specified_date):
 
 
 def open_csv_pop_dct_namedtuple():
-    """Open a csv and populate a dictionary."""
     
     from collections import namedtuple
 
@@ -60,7 +52,6 @@ def open_csv_pop_dct_namedtuple():
 
 
 def output_employees_not_selected(lst1, lst2):
-    """Print a list of employees not selected."""
     
     print("\nemployees not selected")
     for email in lst1:
@@ -71,7 +62,6 @@ def output_employees_not_selected(lst1, lst2):
 
 
 def output_employees_and_executives(dct):
-    """Print a list of all employees and executives."""
     
     print('\n')
     print('email,level')
@@ -80,22 +70,17 @@ def output_employees_and_executives(dct):
 
 
 def prompt_user_for_email_prefix():
-    """Prompt user for email prefix."""
     
     return pyip.inputStr('\nenter the user\'s email prefix or nothing to quit'
                          '\n> ', blank=True)
 
 
 def prompt_user_for_number_guests_to_invite():
-    """Prompt user for the number of guests they'd like to invite."""
 
     return pyip.inputInt('\nHow many guests would you like to invite?\n> ')
 
 
 def remove_selected_employees(dct2, lst):
-    """
-    Remove selected employees from the master list of employees and executives.
-    """
     
     dct1 = {}
     for email, level in dct2.items():
