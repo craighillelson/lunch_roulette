@@ -386,7 +386,7 @@ def build_lunch_schedule():
         prompt_user_to_select_an_executive(number_of_executives,
                                            enumerated_executives)
     else:
-        pass
+        selected_executive = executives[0]
 
     number_of_guests = prompt_user_for_number_of_guests(employees)
     number_of_employees = len(employees)
